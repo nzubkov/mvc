@@ -3,11 +3,12 @@
  * Created by PhpStorm.
  * User: огпе
  * Date: 05.03.2019
- * Time: 22:41
+ * Time: 22:57
  */
-namespace models;
 
-class File extends Model
+namespace controllers;
+
+class UserController extends Controller
 {
 
 }

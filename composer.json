@@ -1,0 +1,10 @@
+{
+  "name": "mvc",
+  "version": "1.0.0",
+  "dependencies": {
+    
+  },
+  "require": {
+    "illuminate/database": "^5.8"
+  }
+}

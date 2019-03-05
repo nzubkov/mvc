@@ -5,8 +5,7 @@
  * Date: 12.12.2018
  * Time: 13:21
  */
-require 'constants.php';
-require VENDOR_DIR . '/autoload.php';
+require_once 'vendor/autoload.php';
 
 spl_autoload_register(function($class){
     $filename = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';

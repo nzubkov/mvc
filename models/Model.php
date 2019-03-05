@@ -6,8 +6,9 @@
  * Time: 22:39
  */
 namespace models;
+use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-abstract class Model
+abstract class Model extends Eloquent
 {
     protected $table;
 }
