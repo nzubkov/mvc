@@ -6,19 +6,7 @@
  * Time: 12:59
  */
 return [
-    'routes' => [
-        '/',
-        'admin',
-        'users',
-        'user/profile',
-        'user/create',
-        'user/update',
-        'users/sort/',
-        'user/remove',
-        'user/setavatar',
-        'file/upload',
-        'file/delete',
-    ],
+
     'controllers' => [
         'user',
         'file',
