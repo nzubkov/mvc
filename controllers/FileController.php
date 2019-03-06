@@ -9,6 +9,7 @@
 namespace controllers;
 
 use models\File\File;
+use models\File\FileException;
 
 class FileController extends Controller
 {
@@ -24,12 +25,12 @@ class FileController extends Controller
     {
         //механизм загрузки файлов
         if(empty($this->userData['file']) || empty($this->userData['userId'])){
+            $this->status = false;
             return $this->status;
         }
         try{
             $uploadedFile = File::upload($this->userData['file']);
             File::create($this->userData['userId'], $uploadedFile);
-            $this->status = true;
         } catch (FileException $e){
             throw new ControllerException($e->getMessage());
         }

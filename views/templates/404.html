@@ -1,0 +1,19 @@
+{% extends "/main/main.html" %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div>
+			<div class="col-12">
+				<p>Это страница 404. Вы попали сюда, потому, что неправильно указали адрес. Проверьте адресную строку и
+					попробуйте перейти снова</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "/main.html" %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+	<header>
+		<div class="row">
+			<div class="col-12 text-center">
+				<h3>Регистрация</h3>
+			</div>
+		</div>
+	</header>
+	<div class="row">
+		<form id="registration-form">
+			<div class="col-12 mx-auto">
+				<div class="input-group row">
+					<div class="form-group">
+						<div class="col-12">
+							<label for="email">Email:</label>
+							<input required class="form-control" type="text" id="email" name="email">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-12">
+							<label for="email">Введите пароль:</label>
+							<input required class="form-control" type="text" id="password" name="password">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-12">
+							<label for="name">Имя:</label>
+							<input class="form-control" type="text" id="name">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-12">
+							<label for="name">Возраст:</label>
+							<input required class="form-control" type="number" id="age">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="avatar">Загрузите изображение (аватар): </label>
+						<input type="file" class="form-control-file" id="avatar" name="avatar">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<a id="registration" class="btn btn-info" href="registration">Зарегистрироваться</a>
+				</div>
+				<div class="col-6">
+					<a class="btn btn-info" href="user/login">Войти</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}
