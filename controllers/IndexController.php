@@ -8,12 +8,11 @@
 
 namespace controllers;
 
-
 class IndexController extends Controller
 {
     public function index()
     {
-        parent::renderView('index', $this->userData);
+        $this->renderView('index', $this->userData);
         $this->status = true;
     }
 }

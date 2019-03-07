@@ -8,12 +8,11 @@
 namespace controllers;
 
 use views\View\View;
-use views\View\ViewException;
 
 abstract class Controller
 {
     protected $userData;
-    protected $status = true;
+    protected $status = false;
     protected $view;
     protected $renderedView = '';
 
@@ -23,9 +22,15 @@ abstract class Controller
         $this->view = new View();
     }
 
+    public function renderView($templatePath, $data = [])
+    {
+        $this->renderedView = $this->view->render($templatePath, !empty($data) ? $data : $this->userData);
+        return $this->renderedView;
+    }
+
     public function hasView()
     {
-        return !empty($this->view);
+        return !empty($this->renderedView);
     }
 
     public function getView()
@@ -41,14 +46,5 @@ abstract class Controller
     public function index()
     {
 
-    }
-
-    public function renderView($templatePath, $data = [])
-    {
-        try {
-            $this->renderedView = $this->view->render($templatePath, !empty($data) ? $data : $this->userData);
-        } catch (ViewException $exception){
-            throw new ControllerException($exception->getMessage());
-        }
     }
 }

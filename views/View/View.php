@@ -14,7 +14,6 @@ use Twig_Error;
 class View
 {
     const PATH_TO_TEMPLATES = ROOT_DIR . '/views/templates';
-    private $template;
     private $templateEngine;
 
     public function __construct()
@@ -28,9 +27,10 @@ class View
     {
         try {
             $path = (stristr($path, '.html')) ? $path : "$path.html";
-            return $this->template = $this->templateEngine->render($path, !empty($data) ? $data : []);
+            $result = $this->templateEngine->render($path, !empty($data) ? $data : []);
         } catch (Twig_Error $exception) {
-            throw new ViewException($exception->getMessage());
+            $result = $exception->getMessage();
         }
+        return $result;
     }
 }

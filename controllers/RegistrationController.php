@@ -12,7 +12,7 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        parent::renderView('registration');
+        $this->renderView('registration');
         $this->status = true;
     }
 }

@@ -6,7 +6,7 @@
  * Time: 22:27
  */
 use \controllers\ControllerException;
-
+session_start();
 require 'constants.php';
 require 'autoloader.php';
 $config = include_once 'config.php';
