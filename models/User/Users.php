@@ -30,7 +30,7 @@ class Users extends Model
         }
     }
 
-    public function getAll(string $sort = 'desc')
+    public function getAll($sort = 'desc')
     {
         $users = self::orderBy('age', strtoupper($sort))->get();
         foreach ($users as $user) {

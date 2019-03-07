@@ -12,13 +12,4 @@ use Illuminate\Database\QueryException;
 abstract class Model extends Eloquent
 {
     protected $table;
-
-    public function save()
-    {
-        try {
-            parent::save();
-        } catch (QueryException $exception){
-            throw $exception;
-        }
-    }
 }

@@ -29,12 +29,15 @@ class UserController extends Controller
 
     public function login()
     {
+        if(empty($this->userData)) {
+            throw new ControllerException('Введите логин и пароль');
+        }
         $user = Users::login($this->userData['login'], $this->userData['password']);
         if(!empty($user)){
             $this->status = true;
             $_SESSION['auth'] = 1;
             $_SESSION['user'] = $user;
-            header('/');
+            header('/profile');
         } else {
             throw new ControllerException('Неправильный логин или пароль. Проверьте ваши данные еще раз');
         }

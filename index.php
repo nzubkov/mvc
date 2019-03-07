@@ -17,15 +17,11 @@ array_shift($uri);
 
 list($controllerName, $action) = [$uri[0], $uri[1]];
 
-if(empty($controllerName)){ //по умолчанию IndexController
-    $controllerName = 'IndexController';
-} elseif(array_search($controllerName, $config['controllers']) === false) {
-    $controllerName = $config['controllers']['404']; //если не нашли берем контроллер 404-й страницы
-}
+$controllerName = !empty($controllerName) ? $controllerName : 'index';
 //приводим название контроллера в надлежащий вид
 $controllerName = stristr($controllerName, 'Controller') ? $controllerName : ucfirst($controllerName) . 'Controller';
 
-//ищем контроллер
+
 
 //добавляем namespace
 $controllerName = 'controllers\\' . $controllerName;
@@ -33,7 +29,7 @@ $controllerName = 'controllers\\' . $controllerName;
 $userData = !empty($_REQUEST) ? $_REQUEST : [];
 try {
     //если действие в контроллере нет, ставим по умолчанию
-    $action = method_exists($action, $controllerName) === false ? 'index' : $action;
+    $action = empty($action) ? 'index' : $action;
     //создаем экземпляр контроллера и передаем в него данные
     $controller = new $controllerName($userData);
     //вызываем действие
