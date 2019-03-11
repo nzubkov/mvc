@@ -12,7 +12,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $this->renderView('index', $this->userData);
+        $this->renderView('index');
         $this->status = true;
     }
 }

@@ -6,7 +6,9 @@
  * Time: 22:27
  */
 use \controllers\ControllerException;
+//запускаем сессию
 session_start();
+
 require 'constants.php';
 require 'autoloader.php';
 require 'bootstrap.php';
@@ -26,25 +28,31 @@ $controllerName = stristr($controllerName, 'Controller') ? $controllerName : ucf
 
 //добавляем namespace
 $controllerName = 'controllers\\' . $controllerName;
+
 //ловим пользовательские данные
 $userData = !empty($_REQUEST) ? $_REQUEST : [];
+//создаем экземпляр контроллера и передаем в него данные
+$controller = new $controllerName($userData);
 try {
-    //если действие в контроллере нет, ставим по умолчанию
+    //если действия в контроллере нет, ставим по умолчанию
     $action = empty($action) ? 'index' : $action;
-    //создаем экземпляр контроллера и передаем в него данные
-    $controller = new $controllerName($userData);
     //вызываем действие
     $controller->$action();
 } catch (ControllerException $exception){
     echo $exception->getMessage();
 } finally{
-    $view = $controller->hasView() ? $controller->getView() : '';
-    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
-    if($isAjax) {
-        $response['error'] = $exception->getMessage();
-        $response['status'] = $controller->getStatus();
-        $response['view'] = $view;
-        $response = json_encode($response, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-    }
-    echo !empty($response) ? $response : $view;
+    //попробуем найти какой-нибудь view (html-шаблон) от контроллера
+    $html = $controller->hasView() ? $controller->getView() : '';
+    echo $html;  //заккоментировать если использовать ajax-запрос
+
+    //расскоментировать в случае использования ajax-запросов
+//    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+//    if($isAjax) {
+//        $response['error'] = $exception->getMessage();
+//        $response['status'] = $controller->getStatus();
+//        $response['view'] = $view;
+//        $response = json_encode($response, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+//    }
+//    echo !empty($response) ? $response : $view;
+
 }

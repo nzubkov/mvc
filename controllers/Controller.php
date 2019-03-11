@@ -22,10 +22,9 @@ abstract class Controller
         $this->view = new View();
     }
 
-    public function renderView($templatePath, $data = [])
+    public function renderView($templatePath = '', $data = [])
     {
         $this->renderedView = $this->view->render($templatePath, !empty($data) ? $data : $this->userData);
-        return $this->renderedView;
     }
 
     public function hasView()
