@@ -11,5 +11,4 @@ use Illuminate\Database\QueryException;
 
 abstract class Model extends Eloquent
 {
-    protected $table;
 }

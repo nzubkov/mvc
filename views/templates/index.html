@@ -12,7 +12,7 @@
 		</div>
 	</header>
 	<div class="row">
-		<form id="login-form">
+		<form action="/user/login" method="post" id="login-form">
 			<div class="col-12 mx-auto">
 				<div class="input-group row">
 					<div class="form-group">
@@ -24,7 +24,7 @@
 					<div class="form-group">
 						<div class="col-12">
 							<label for="password">Пароль:</label>
-							<input class="form-control" type="password" id="password">
+							<input class="form-control" type="password" id="password" name="password">
 						</div>
 					</div>
 				</div>
@@ -34,13 +34,13 @@
 					<a id="registration" class="btn btn-info" href="/registration">Зарегистрироваться</a>
 				</div>
 				<div class="col-6">
-					<a class="btn btn-info" href="/user/login">Войти</a>
+					<button class="btn btn-info" type="submit">Войти</button>
 				</div>
-				{% if message|length %}
-				<div><p>{{ message }}</p></div>
-				{% endif %}
 			</div>
 		</form>
+		{% if message|length %}
+		<div><p>{{ message }}</p></div>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

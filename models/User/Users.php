@@ -44,17 +44,12 @@ class Users extends Model
         return $age > self::ADULT_AGE;
     }
 
-    public function save()
-    {
-        try {
-            parent::save();
-        } catch (QueryException $exception) {
-            throw new UserException($exception->getMessage());
-        }
-    }
-
     public static function login($login, $password)
     {
-        return self::where('email', $login)->andWhere('password', $password);
+        return self::where([
+            ['email', '=', $login],
+            ['password', '=' , $password]
+        ]
+        )->get()[0];
     }
 }

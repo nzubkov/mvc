@@ -29,18 +29,20 @@ class UserController extends Controller
 
     public function login()
     {
+        if(!empty($_SESSION['auth'])) {
+            header('Location: /profile');
+        }
         if(empty($this->userData)) {
             $this->renderView('index', ['message' => 'Введите логин и пароль']);
             return;
         }
         $user = Users::login($this->userData['login'], $this->userData['password']);
         if(!empty($user)){
-            $this->status = true;
             $_SESSION['auth'] = 1;
-            $_SESSION['user'] = $user;
-            header('/profile');
+            $_SESSION['user_id'] = $user->id;
+            header('Location: /profile');
         } else {
-            throw new ControllerException('Неправильный логин или пароль. Проверьте ваши данные еще раз');
+            $this->renderView('index', ['message' => 'Неправильный логин или пароль. Проверьте ваши данные еще раз']);
         }
     }
 
