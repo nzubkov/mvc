@@ -9,6 +9,7 @@ use \controllers\ControllerException;
 session_start();
 require 'constants.php';
 require 'autoloader.php';
+require 'bootstrap.php';
 $config = include_once 'config.php';
 
 $uri = explode('/', str_replace('mvc/', '', $_SERVER['REQUEST_URI']));

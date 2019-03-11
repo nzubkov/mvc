@@ -21,6 +21,8 @@ DB::schema()->create('users', function ($table) {
     $table->text('password');
     $table->integer('age')->nullable(false);
     $table->text('avatar')->nullable(true)->default(NULL);
+    $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+    $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 });
 
 DB::schema()->create('files', function ($table) {
@@ -28,4 +30,6 @@ DB::schema()->create('files', function ($table) {
     $table->text('name')->nullable(false);
     $table->integer('user_id')->nullable(false);
     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+    $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 });
