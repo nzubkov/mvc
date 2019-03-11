@@ -30,7 +30,8 @@ class UserController extends Controller
     public function login()
     {
         if(empty($this->userData)) {
-            throw new ControllerException('Введите логин и пароль');
+            $this->renderView('index', ['message' => 'Введите логин и пароль']);
+            return;
         }
         $user = Users::login($this->userData['login'], $this->userData['password']);
         if(!empty($user)){

@@ -31,11 +31,14 @@
 			</div>
 			<div class="row">
 				<div class="col-6">
-					<a id="registration" class="btn btn-info" href="registration">Зарегистрироваться</a>
+					<a id="registration" class="btn btn-info" href="/registration">Зарегистрироваться</a>
 				</div>
 				<div class="col-6">
-					<a class="btn btn-info" href="user/login">Войти</a>
+					<a class="btn btn-info" href="/user/login">Войти</a>
 				</div>
+				{% if message|length %}
+				<div><p>{{ message }}</p></div>
+				{% endif %}
 			</div>
 		</form>
 	</div>
