@@ -12,7 +12,7 @@
 		</div>
 	</header>
 	<div class="row">
-		<form id="registration-form">
+		<form enctype="multipart/form-data" action="/registration/signup" method="post" id="registration-form">
 			<div class="col-12 mx-auto">
 				<div class="input-group row">
 					<div class="form-group">
@@ -41,13 +41,13 @@
 					</div>
 					<div class="form-group">
 						<label for="avatar">Загрузите изображение (аватар): </label>
-						<input type="file" class="form-control-file" id="avatar" name="avatar">
+						<input type="file" accept="image/*" class="form-control-file" id="avatar" name="avatar">
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-6">
-					<a id="registration" class="btn btn-info" href="registration">Зарегистрироваться</a>
+					<button id="registration" class="btn btn-info" type="submit">Зарегистрироваться</button>
 				</div>
 			</div>
 			{% if foo|length != 0 %}

@@ -22,9 +22,10 @@ class Users extends Model
         $user->password = $userData['password'];
         $user->name = !empty($userData['name']) ? $userData['name'] : '';
         $user->age = $userData['age'];
-        $user->avatar = !empty($userData['avatar']) ? $userData['avatar'] : '';
         try{
             $user->save();
+            self::setAvatar($userData['avatar'], $user);
+            return $user;
         } catch (QueryException $exception){
             throw new UserException($exception->getMessage());
         }
@@ -51,5 +52,14 @@ class Users extends Model
             ['password', '=' , $password]
         ]
         )->get()[0];
+    }
+
+    public static function setAvatar(array $avatarFile, $user)
+    {
+        if(!empty($_FILES['avatar'])) {
+            Files::upload($user->id, $avatarFile);
+            $user->avatar = "/upload/{$_FILES['avatar']['name']}";
+            $user->save();
+        }
     }
 }

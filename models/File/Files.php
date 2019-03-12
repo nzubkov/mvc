@@ -7,6 +7,7 @@
  */
 namespace models\File;
 
+use helpers\FileUploader;
 use models\Model;
 
 class Files extends Model
@@ -29,17 +30,18 @@ class Files extends Model
 
     public static function upload(int $userId, array $file)
     {
-        $uploadDir = '/upload';
-        $uploadFile = $uploadDir . basename($file['tmp_name']);
-        if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-            $file = new Files(['name' => $file[ 'name'], 'userId' => $userId]);
+        if(empty($userId)) {
+            $userId = $_SESSION['user_id'];
+        }
+        if (FileUploader::upload($file)) {
+            $file = new Files(['name' => $file['name'], 'userId' => $userId]);
             $file->save();
         } else {
             throw new FileException('Не удалось записать файл.');
         }
     }
 
-    public static function getAll($userId, $sort = 'desc')
+    public static function getAll(int $userId = 0, string $sort = 'desc')
     {
         if(!empty($userId)){
             $files = self::where('user_id', $userId)->orderBy('name', $sort)->get();

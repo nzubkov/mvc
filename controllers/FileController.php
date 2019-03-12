@@ -28,13 +28,14 @@ class FileController extends Controller
 
     public function upload()
     {
+        //TODO добавить механизм проверки прав (авторизации)
         //механизм загрузки файлов
-        if(empty($this->userData['file']) || empty($this->userData['userId'])){
+        if(empty($_FILES)){
             $this->status = false;
             return $this->status;
         }
         try{
-            Files::upload($this->userData['userId'], $this->userData['file']);
+            Files::upload($_SESSION['user_id'], $_FILES);
         } catch (FileException $e){
             $this->status = false;
             throw new ControllerException($e->getMessage());

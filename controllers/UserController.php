@@ -64,4 +64,25 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function signup()
+    {
+        if (empty($this->userData)) {
+            return $this->status;
+        }
+        if (!empty($_FILES['avatar'])) {
+            $this->userData['avatar'] = $_FILES['avatar'];
+        }
+        try {
+            $user = Users::create($this->userData);
+            //TODO автоматическая аутентификация
+            $message = 'Регистрация прошла успешно. Можете перейти на страницу входа в <a href="/">Личный кабинет</a>';
+        } catch (UserException $exception) {
+            $message = 'Не удалось зарегистрироваться из-за ошибки: ' . $exception->getMessage();
+        } finally {
+            $this->renderView('registration', [
+                'message' => !empty($message) ? $message : ''
+            ]);
+        }
+    }
 }
