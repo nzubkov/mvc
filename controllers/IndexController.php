@@ -12,7 +12,10 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $this->renderView('index');
-        $this->status = true;
+        if(!empty($_SESSION['user_id'])) {
+            header('Location: /profile');
+        } else {
+            $this->renderView('index');
+        }
     }
 }

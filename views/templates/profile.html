@@ -4,8 +4,15 @@
 {% endblock %}
 {% block content %}
 <h3>Профиль пользователя</h3>
+{% if user|length > 0 %}
+<div class="col-12">
+    <p>{{ user.name }}</p>
+    <p>{{ user.email }}</p>
+    <p>{{ user.age }}</p>
+    <p>{{ user.avatar }}</p>
+</div>
+{% endif %}
 {% endblock %}
-{% block javascript
-s %}
+{% block javascripts %}
 {{ parent() }}
 {% endblock %}
