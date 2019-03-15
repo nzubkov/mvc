@@ -18,12 +18,11 @@ class FileController extends Controller
         $files = Files::getAll(!empty($this->userData['userId']) ? $this->userData['userId'] : '');
         $this->renderView('files', $files);
     }
+
     public function __construct($userData = [])
     {
-        parent::__construct([
-            'file' => !empty($_FILES['file']) ? $_FILES['file'] : [],
-            'userId' => $userData
-        ]);
+        parent::__construct($userData);
+        $this->userData['file'] = !empty($_FILES['file']) ? $_FILES['file'] : [];
     }
 
     public function upload()

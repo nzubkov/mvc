@@ -46,25 +46,6 @@ class UserController extends Controller
         }
     }
 
-    public function register()
-    {
-        if(empty($this->userData)){
-            return $this->status;
-        }
-
-        try {
-            Users::create($this->userData);
-            $this->status = true;
-            $message = 'Регистрация прошла успешно. Можете перейти на страницу входа в <a href="/">Личный кабинет</a>';
-        } catch(UserException $exception) {
-            $message = 'Не удалось зарегистрироваться из-за ошибки: ' . $exception->getMessage();
-        } finally {
-            $this->renderView('registration', [
-                'message' => $message
-            ]);
-        }
-    }
-
     public function signup()
     {
         if (empty($this->userData)) {

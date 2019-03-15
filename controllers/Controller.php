@@ -16,7 +16,7 @@ abstract class Controller
     protected $view;
     protected $renderedView = '';
 
-    public function __construct($userData)
+    public function __construct($userData = [])
     {
         $this->userData = !empty($userData) ? $userData : [] ;
         $this->view = new View();
