@@ -7,6 +7,7 @@
  */
 namespace models\User;
 use Illuminate\Database\QueryException;
+use models\File\Files;
 use models\Model;
 
 class Users extends Model

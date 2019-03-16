@@ -15,9 +15,15 @@ require 'bootstrap.php';
 $config = include_once 'config.php';
 
 $uri = explode('/', str_replace('mvc/', '', $_SERVER['REQUEST_URI']));
-array_shift($uri);
-//разбираем URI на контроллер и действие
 
+//игнорируем запрос favicon
+if(strpos($_SERVER['REQUEST_URI'],'favicon.ico')){
+    return true;
+}
+//избавляемся от слеша в начале URI
+array_shift($uri);
+
+//разбираем URI на контроллер и действие
 list($controllerName, $action) = [$uri[0], $uri[1]];
 
 $controllerName = !empty($controllerName) ? $controllerName : 'index';

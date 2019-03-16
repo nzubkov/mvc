@@ -11,9 +11,9 @@ namespace helpers;
 
 class FileUploader
 {
-    public static function upload($file = [], $uploadDir = '/upload')
+    public static function upload($file = [], $uploadDir = '/upload/')
     {
-        $uploadFile = $uploadDir . basename($file['tmp_name']);
-        return move_uploaded_file($file['name'], $uploadFile);
+        $uploadPath = ROOT_DIR . $uploadDir . $file['name'];
+        return move_uploaded_file($file['tmp_name'], $uploadPath);
     }
 }
