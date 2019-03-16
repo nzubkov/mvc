@@ -16,7 +16,7 @@ use Illuminate\Database\Capsule\Manager as DB;
 
 DB::schema()->create('users', function ($table) {
     $table->increments('id');
-    $table->string('email', 255)->nullable(false)->change();
+    $table->string('email')->unique()->nullable(false);
     $table->text('name')->nullable(true)->default(NULL);
     $table->text('password');
     $table->integer('age')->nullable(false);
