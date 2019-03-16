@@ -18,7 +18,7 @@ class Files extends Model
     public function __construct($fileData)
     {
         $this->name = $fileData['name'];
-        $this->userId = $fileData['userId'];
+        $this->user_id = $fileData['userId'];
     }
 
     /** Функция загрузки файлов на сервер, сохраняет информацию о файле в БД после загрузки
