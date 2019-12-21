@@ -8,5 +8,5 @@
     "illuminate/database": "^5.8",
     "twig/twig": "^2.0",
     "guzzlehttp/guzzle": "^6.5"
-  },
+  }
 }
