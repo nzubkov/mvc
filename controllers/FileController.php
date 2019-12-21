@@ -31,10 +31,12 @@ class FileController extends Controller
         //механизм загрузки файлов
         if(empty($_FILES)){
             $this->status = false;
+
             return $this->status;
         }
         try{
             Files::upload($_SESSION['user_id'], $_FILES);
+            $this->status = true;
         } catch (FileException $e){
             $this->status = false;
             throw new ControllerException($e->getMessage());

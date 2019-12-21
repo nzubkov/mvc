@@ -23,17 +23,18 @@ class Files extends Model
 
     /** Функция загрузки файлов на сервер, сохраняет информацию о файле в БД после загрузки
      *
-     * @param int $userId - id пользователя, загружаюшего файл
-     * @param array $file - информация о загружаемом файле
+     * @param int|null $userId - id пользователя, загружаюшего файл
+     * @param array|null $file - информация о загружаемом файле
      * @throws FileException
      */
 
-    public static function upload(int $userId, array $file)
+    public static function upload(?int $userId = null, array $file = [])
     {
+        $file = $file['upload'] ?? $file;
         if(empty($userId)) {
             $userId = $_SESSION['user_id'];
         }
-        if (FileUploader::upload($file)) {
+        if (!empty($file) && FileUploader::upload($file)) {
             $file = new Files(['name' => $file['name'], 'userId' => $userId]);
             $file->save();
         } else {

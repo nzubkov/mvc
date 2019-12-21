@@ -10,8 +10,8 @@ use \controllers\ControllerException;
 session_start();
 
 require 'constants.php';
-require 'autoloader.php';
-require 'bootstrap.php';
+require ROOT_DIR . 'autoloader.php';
+require ROOT_DIR . 'bootstrap.php';
 $config = include_once 'config.php';
 
 $uri = explode('/', str_replace('mvc/', '', $_SERVER['REQUEST_URI']));
@@ -46,19 +46,16 @@ try {
     $controller->$action();
 } catch (ControllerException $exception){
     echo $exception->getMessage();
-} finally{
+} finally {
     //попробуем найти какой-нибудь view (html-шаблон) от контроллера
     $html = $controller->hasView() ? $controller->getView() : '';
-    echo $html;  //заккоментировать если использовать ajax-запрос
-
     //расскоментировать в случае использования ajax-запросов
-//    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
-//    if($isAjax) {
-//        $response['error'] = $exception->getMessage();
-//        $response['status'] = $controller->getStatus();
-//        $response['view'] = $view;
-//        $response = json_encode($response, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-//    }
-//    echo !empty($response) ? $response : $view;
-
+    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+    if($isAjax) {
+        $response['error'] = $exception->getMessage();
+        $response['status'] = $controller->getStatus();
+//        $response['view'] = $html;
+        $response = json_encode($response, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+    }
+    echo !empty($response) ? $response : $html;
 }

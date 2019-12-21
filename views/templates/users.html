@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block content %}
+{% if message|length %}
+    <div><p>{{ message }}</p></div>
+{% endif %}
+{% if users|length %}
+    {% for user in users %}
+        <p>{{user.name}}</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}
