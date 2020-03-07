@@ -10,7 +10,7 @@ use \controllers\ControllerException;
 session_start();
 
 require 'constants.php';
-require ROOT_DIR . 'autoloader.php';
+require ROOT_DIR . 'vendor/autoload.php';
 require ROOT_DIR . 'bootstrap.php';
 $config = include_once 'config.php';
 

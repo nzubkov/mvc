@@ -1,8 +1,13 @@
 {
   "name": "mvc",
   "version": "1.0.0",
-  "dependencies": {
-    
+  "autoload": {
+    "psr-4": {
+      "controllers\\": "controllers/",
+      "helpers\\": "helpers/",
+      "models\\": "models/",
+      "views\\": "views/"
+    }
   },
   "require": {
     "illuminate/database": "^5.8",
