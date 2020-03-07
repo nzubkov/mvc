@@ -6,7 +6,6 @@
  * Time: 12:59
  */
 return [
-
     'controllers' => [
         'user',
         'file',

@@ -9,7 +9,9 @@
     <p>{{ user.name }}</p>
     <p>{{ user.email }}</p>
     <p>{{ user.age }}</p>
-    <p>{{ user.avatar }}</p>
+    {% if user.avatar %}
+        <img src="{{ user.avatar }}">
+    {% endif %}
 </div>
 {% endif %}
 {% endblock %}

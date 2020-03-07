@@ -35,7 +35,7 @@ class FileController extends Controller
             return $this->status;
         }
         try{
-            Files::upload($_SESSION['user_id'], $_FILES);
+            Files::upload(1, $_FILES);
             $this->status = true;
         } catch (FileException $e){
             $this->status = false;

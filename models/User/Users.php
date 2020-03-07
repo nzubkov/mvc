@@ -59,7 +59,7 @@ class Users extends Model
     {
         if(!empty($_FILES['avatar'])) {
             Files::upload($user->id, $avatarFile);
-            $user->avatar = "/upload/{$_FILES['avatar']['name']}";
+            $user->avatar = DIRECTORY_SEPARATOR . UPLOAD_DIR_NAME . DIRECTORY_SEPARATOR . "{$_FILES['avatar']['name']}";
             $user->save();
         }
     }

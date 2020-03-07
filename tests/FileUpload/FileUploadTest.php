@@ -43,7 +43,7 @@ class FileUploadTest extends TestCase
             'XDEBUG_SESSION_START' => 'PHPSTORM',
             'multipart' => [
                 [
-                    'name' => 'upload',
+                    'name' => 'uploads',
                     'contents' => $fileContent,
                     'filename' => end(explode('/', $filePath)),
                 ],

@@ -24,7 +24,7 @@
 					<div class="form-group">
 						<div class="col-12">
 							<label for="email">Введите пароль:</label>
-							<input required class="form-control" type="text" id="password" name="password">
+							<input required class="form-control" type="password" id="password" name="password">
 						</div>
 					</div>
 					<div class="form-group">
@@ -52,7 +52,7 @@
 			</div>
 			{% if message|length != 0 %}
 			<div class="message">
-				{{ message }}
+				{{ message | raw }}
 			</div>
 			{% endif %}
 		</form>

@@ -9,6 +9,8 @@
 if (!defined('ROOT_DIR')){
     define('ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR);
 }
+const UPLOAD_DIR_NAME = 'uploads';
+
 if (!defined('UPLOAD_DIR')) {
-    define('UPLOAD_DIR', ROOT_DIR . 'uploads' . DIRECTORY_SEPARATOR);
+    define('UPLOAD_DIR', ROOT_DIR . UPLOAD_DIR_NAME . DIRECTORY_SEPARATOR);
 }
