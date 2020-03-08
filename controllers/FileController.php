@@ -34,8 +34,8 @@ class FileController extends Controller
 
             return $this->status;
         }
-        try{
-            Files::upload(1, $_FILES);
+        try {
+            Files::upload($this->userData['userId'], $_FILES);
             $this->status = true;
         } catch (FileException $e){
             $this->status = false;
