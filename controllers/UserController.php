@@ -8,8 +8,9 @@
 
 namespace controllers;
 
-use models\User\Users;
+use models\User\User;
 use models\User\UserException;
+use services\UserRegistrationService;
 
 class UserController extends Controller
 {
@@ -21,7 +22,7 @@ class UserController extends Controller
     public function profile()
     {
         if(!empty($_SESSION['auth'])){
-            $this->renderView('profile', Users::where('id', $_SESSION['user']['id']));
+            $this->renderView('profile', User::where('id', $_SESSION['user']['id']));
         } else {
             $this->index();
         }
@@ -36,7 +37,7 @@ class UserController extends Controller
             $this->renderView('index', ['message' => 'Введите логин и пароль']);
             return;
         }
-        $user = Users::login($this->userData['login'], $this->userData['password']);
+        $user = User::login($this->userData['login'], $this->userData['password']);
         if(!empty($user)){
             $_SESSION['auth'] = 1;
             $_SESSION['user_id'] = $user->id;
@@ -54,16 +55,8 @@ class UserController extends Controller
         if (!empty($_FILES['avatar'])) {
             $this->userData['avatar'] = $_FILES['avatar'];
         }
-        try {
-            $user = Users::create($this->userData);
-            //TODO автоматическая аутентификация
-            $message = 'Регистрация прошла успешно. Можете перейти на страницу входа в <a href="/">Личный кабинет</a>';
-        } catch (UserException $exception) {
-            $message = 'Не удалось зарегистрироваться из-за ошибки: ' . $exception->getMessage();
-        } finally {
-            $this->renderView('registration', [
-                'message' => !empty($message) ? $message : ''
-            ]);
-        }
+        $service = new UserRegistrationService();
+        $this->status = $service->run($this->userData);
+        $this->renderView('registration', ['success' => $this->status, 'errors' => $service->getErrors()]);
     }
 }

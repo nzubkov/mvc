@@ -2,16 +2,14 @@
 /**
  * Company: Etton Group
  * User: zubkov.n
- * Date: 21.12.2019
+ * Date: 29.03.2020
  */
-
-namespace tests\RequestTest;
 
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 require dirname(dirname(__DIR__)) . './constants.php';
 require ROOT_DIR . 'vendor/autoload.php';
-class RequestTest extends TestCase
+class SignUpTest extends TestCase
 {
     private $client;
 
@@ -21,10 +19,15 @@ class RequestTest extends TestCase
         $this->client = new Client(['base_uri' => 'http://mvc']);
     }
 
-    public function testIndex()
+    public function testSignUp()
     {
-        $result = $this->client->get('/profile');
+        $result = $this->client->request( 'POST', '/user/signup', [
+            'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
+            'XDEBUG_SESSION_START' => 'PHPSTORM',
+            'name' => 'Nikolay',
+            'debug' => true
+        ]);
         $this->assertEquals(200, $result->getStatusCode());
-        $this->assertContains('mvc', (string)$result->getBody());
+        $this->assertIsString((string)$result->getBody());
     }
 }

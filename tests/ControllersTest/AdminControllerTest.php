@@ -6,7 +6,7 @@
  */
 session_start();
 require dirname(dirname(__DIR__)) . './constants.php';
-require ROOT_DIR . 'autoloader.php';
+require ROOT_DIR . 'vendor/autoload.php';
 use PHPUnit\Framework\TestCase;
 use \controllers\AdminController;
 

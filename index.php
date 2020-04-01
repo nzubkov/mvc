@@ -28,8 +28,7 @@ list($controllerName, $action) = [$uri[0], $uri[1]];
 
 $controllerName = !empty($controllerName) ? $controllerName : 'index';
 //приводим название контроллера в надлежащий вид
-$controllerName = stristr($controllerName, 'Controller') ? $controllerName : ucfirst($controllerName) . 'Controller';
-
+$controllerName = ucfirst($controllerName) . 'Controller';
 
 
 //добавляем namespace
@@ -52,7 +51,7 @@ try {
     //расскоментировать в случае использования ajax-запросов
     $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
     if($isAjax) {
-        $response['error'] = $exception->getMessage();
+        $response['errors'] = $exception->getMessage();
         $response['status'] = $controller->getStatus();
 //        $response['view'] = $html;
         $response = json_encode($response, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

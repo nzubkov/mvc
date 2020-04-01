@@ -7,10 +7,10 @@
  */
 namespace models\User;
 use Illuminate\Database\QueryException;
-use models\File\Files;
+use models\File\File;
 use models\Model;
 
-class Users extends Model
+class User extends Model
 {
     const ADULT_AGE = 18;
     protected $table = 'users';
@@ -55,12 +55,25 @@ class Users extends Model
         )->get()[0];
     }
 
-    public static function setAvatar(array $avatarFile, $user)
+    /**
+     * @param array|null $avatarFile
+     * @param $user
+     * @throws \models\File\FileException
+     */
+    public static function setAvatar(?array $avatarFile, $user)
     {
         if(!empty($_FILES['avatar'])) {
-            Files::upload($user->id, $avatarFile);
+            File::upload($user->id, $avatarFile);
             $user->avatar = DIRECTORY_SEPARATOR . UPLOAD_DIR_NAME . DIRECTORY_SEPARATOR . "{$_FILES['avatar']['name']}";
             $user->save();
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function resolveChildRouteBinding($childType, $value, $field)
+    {
+        // TODO: Implement resolveChildRouteBinding() method.
     }
 }

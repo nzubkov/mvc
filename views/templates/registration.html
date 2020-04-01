@@ -12,7 +12,7 @@
 		</div>
 	</header>
 	<div class="row">
-		<form enctype="multipart/form-data" action="/user/signup" method="post" id="registration-form">
+		<form enctype="multipart/form-data" action="/mvc/user/signup" method="post" id="registration-form">
 			<div class="col-12 mx-auto">
 				<div class="input-group row">
 					<div class="form-group">
@@ -25,6 +25,10 @@
 						<div class="col-12">
 							<label for="email">Введите пароль:</label>
 							<input required class="form-control" type="password" id="password" name="password">
+						</div>
+						<div class="col-12">
+							<label for="email">Подтвердите пароль:</label>
+							<input required class="form-control" type="password" id="confirm_password" name="confirm_password">
 						</div>
 					</div>
 					<div class="form-group">
@@ -50,10 +54,11 @@
 					<button id="registration" class="btn btn-info" type="submit">Зарегистрироваться</button>
 				</div>
 			</div>
-			{% if message|length != 0 %}
-			<div class="message">
-				{{ message | raw }}
-			</div>
+			{% if errors|length != 0 %}
+				{% for error in errors %}
+				<div class="message">
+					{{ error | raw }}
+				</div>
 			{% endif %}
 		</form>
 	</div>

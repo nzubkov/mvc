@@ -8,6 +8,7 @@
 namespace views\View;
 
 use \Twig\Environment;
+use Twig\Error\Error;
 use \Twig\Loader\FilesystemLoader;
 use Twig_Error;
 
@@ -28,7 +29,7 @@ class View
         try {
             $path = (stristr($path, '.html')) ? $path : "$path.html";
             $result = $this->templateEngine->render($path, !empty($data) ? $data : []);
-        } catch (Twig_Error $exception) {
+        } catch (Error $exception) {
             $result = $exception->getMessage();
         }
         return $result;

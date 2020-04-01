@@ -6,12 +6,14 @@
       "controllers\\": "controllers/",
       "helpers\\": "helpers/",
       "models\\": "models/",
-      "views\\": "views/"
+      "views\\": "views/",
+      "services\\": "services/"
     }
   },
   "require": {
     "illuminate/database": "^5.8",
     "twig/twig": "^2.0",
-    "guzzlehttp/guzzle": "^6.5"
+    "guzzlehttp/guzzle": "^6.5",
+    "rakit/validation": "^1.2"
   }
 }

@@ -7,11 +7,9 @@
 namespace tests\FileUpload;
 session_start();
 require dirname(dirname(__DIR__)) . './constants.php';
-require ROOT_DIR . 'autoloader.php';
+require ROOT_DIR . 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\UploadedFile;
-use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\TestCase;
 
 class FileUploadTest extends TestCase
@@ -28,19 +26,20 @@ class FileUploadTest extends TestCase
     {
         parent::setUp();
         $_SESSION = [];
-        $this->http = new Client(['base_uri' => 'http://mvc', 'cookies' => true]);
+        $this->http = new Client(['base_uri' => 'http://loftschool/', 'cookies' => true]);
         $this->rootDir = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR;
         $this->uploadDir = $this->rootDir . 'uploads' . DIRECTORY_SEPARATOR;
     }
 
     public function testUpload()
     {
-        $url = '/file/upload';
+        $url = '/mvc/file/upload';
         $fileName = 'image.jpg';
         $filePath = __DIR__. DIRECTORY_SEPARATOR . $fileName;
         $fileContent = file_get_contents($filePath);
         $request = $this->http->post($url, [
             'XDEBUG_SESSION_START' => 'PHPSTORM',
+            'userId' => 1,
             'multipart' => [
                 [
                     'name' => 'uploads',
@@ -48,8 +47,9 @@ class FileUploadTest extends TestCase
                     'filename' => end(explode('/', $filePath)),
                 ],
             ],
+            'debug' => true
         ]);
         $this->assertEquals('200', $request->getStatusCode());
-        $this->assertNotEmpty(file_get_contents(UPLOAD_DIR . $fileName));
+        $this->assertFileExists(UPLOAD_DIR . $fileName);
     }
 }

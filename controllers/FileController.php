@@ -8,14 +8,14 @@
 
 namespace controllers;
 
-use models\File\Files;
+use models\File\File;
 use models\File\FileException;
 
 class FileController extends Controller
 {
     public function index()
     {
-        $files = Files::getAll(!empty($this->userData['userId']) ? $this->userData['userId'] : '');
+        $files = File::getAll(!empty($this->userData['userId']) ? $this->userData['userId'] : '');
         $this->renderView('files', $files);
     }
 
@@ -35,7 +35,7 @@ class FileController extends Controller
             return $this->status;
         }
         try {
-            Files::upload($this->userData['userId'], $_FILES);
+            File::upload($this->userData['userId'], $_FILES);
             $this->status = true;
         } catch (FileException $e){
             $this->status = false;

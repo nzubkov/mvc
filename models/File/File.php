@@ -10,7 +10,7 @@ namespace models\File;
 use helpers\FileUploader;
 use models\Model;
 
-class Files extends Model
+class File extends Model
 {
     protected $table = 'files';
     protected $fillable = ['name','user_id'];
@@ -35,7 +35,7 @@ class Files extends Model
             $userId = $_SESSION['user_id'];
         }
         if (!empty($file) && FileUploader::upload($file)) {
-            $file = new Files(['name' => $file['name'], 'userId' => $userId]);
+            $file = new File(['name' => $file['name'], 'userId' => $userId]);
             $file->save();
         } else {
             throw new FileException('Не удалось записать файл.');
