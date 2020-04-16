@@ -15,5 +15,8 @@
     "twig/twig": "^2.0",
     "guzzlehttp/guzzle": "^6.5",
     "rakit/validation": "^1.2"
+  },
+  "require-dev": {
+    "vimeo/psalm": "^3.11"
   }
 }
